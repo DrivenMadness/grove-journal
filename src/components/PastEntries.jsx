@@ -48,20 +48,20 @@ export default function PastEntries() {
       >
         <button
           onClick={() => setScreen('welcome')}
-          className="font-ui text-xs tracking-widest uppercase text-grove-500/40 
-                     hover:text-grove-400/60 transition-colors cursor-pointer"
+          className="font-ui text-xs tracking-widest uppercase text-water-500/50 
+                     hover:text-water-400/70 transition-colors cursor-pointer"
         >
           ← Back
         </button>
         <div className="flex items-center gap-4">
-          <span className="font-ui text-xs text-grove-500/30">
+          <span className="font-ui text-xs text-water-500/40">
             {entries.length} {entries.length === 1 ? 'entry' : 'entries'}
           </span>
           {entries.length > 0 && (
             <button
               onClick={exportEntries}
-              className="font-ui text-xs tracking-widest uppercase text-grove-500/40 
-                         hover:text-grove-400/60 transition-colors cursor-pointer"
+              className="font-ui text-xs tracking-widest uppercase text-water-500/50 
+                         hover:text-water-400/70 transition-colors cursor-pointer"
             >
               Export
             </button>
@@ -73,7 +73,7 @@ export default function PastEntries() {
         <motion.h2
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="font-display text-3xl font-light text-grove-200/80 mb-8"
+          className="font-display text-3xl font-light text-grove-200/85 mb-8"
         >
           Past Reflections
         </motion.h2>
@@ -83,7 +83,7 @@ export default function PastEntries() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="font-body text-lg text-grove-400/40 italic"
+            className="font-body text-lg text-water-500/50 italic"
           >
             No entries yet. Your reflections will appear here.
           </motion.p>
@@ -95,8 +95,8 @@ export default function PastEntries() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
-                className="border border-grove-400/10 rounded-xl overflow-hidden
-                           bg-grove-900/20 backdrop-blur-sm hover:border-grove-400/20
+                className="border border-water-400/15 rounded-xl overflow-hidden
+                           bg-grove-900/20 backdrop-blur-sm hover:border-water-400/25
                            transition-all duration-300"
               >
                 <button
@@ -109,23 +109,23 @@ export default function PastEntries() {
                     <div className="flex-1 min-w-0">
                       {/* Synthesis / maxim */}
                       {entry.synthesis && (
-                        <p className="font-display text-base text-grove-200/70 italic mb-2 truncate">
+                        <p className="font-display text-base text-grove-200/75 italic mb-2 truncate">
                           "{entry.synthesis}"
                         </p>
                       )}
                       {/* Preview */}
-                      <p className="font-body text-sm text-grove-400/50 line-clamp-2">
+                      <p className="font-body text-sm text-water-500/55 line-clamp-2">
                         {getPreview(entry)}
                       </p>
                     </div>
                     <div className="flex flex-col items-end gap-1 shrink-0">
-                      <span className="font-ui text-xs text-grove-400/40">
+                      <span className="font-ui text-xs text-water-400/55">
                         {formatDate(entry.startedAt)}
                       </span>
-                      <span className="font-ui text-[10px] text-grove-500/30">
+                      <span className="font-ui text-[10px] text-water-500/40">
                         {formatTime(entry.startedAt)}
                       </span>
-                      <span className="font-ui text-[10px] tracking-wider uppercase text-grove-500/25">
+                      <span className="font-ui text-[10px] tracking-wider uppercase text-water-500/35">
                         {getModeLabel(entry.mode)}
                       </span>
                     </div>
@@ -142,9 +142,9 @@ export default function PastEntries() {
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
-                      <div className="px-6 pb-4 border-t border-grove-400/5">
+                      <div className="px-6 pb-4 border-t border-water-400/10">
                         {entry.content && (
-                          <p className="font-body text-sm text-grove-300/60 leading-relaxed mt-4 whitespace-pre-wrap">
+                          <p className="font-body text-sm text-grove-200/65 leading-relaxed mt-4 whitespace-pre-wrap">
                             {entry.content}
                           </p>
                         )}
@@ -153,10 +153,10 @@ export default function PastEntries() {
                           <div className="mt-4 space-y-3">
                             {entry.guidedResponses.map((gr, i) => (
                               <div key={i}>
-                                <p className="font-ui text-xs text-grove-500/40 mb-1">
+                                <p className="font-ui text-xs text-water-500/50 mb-1">
                                   {gr.prompt}
                                 </p>
-                                <p className="font-body text-sm text-grove-300/60">
+                                <p className="font-body text-sm text-grove-200/65">
                                   {gr.response}
                                 </p>
                               </div>
@@ -165,14 +165,14 @@ export default function PastEntries() {
                         )}
 
                         {entry.aiMessages?.length > 0 && (
-                          <div className="mt-4 pt-3 border-t border-grove-400/5">
-                            <span className="font-ui text-[10px] tracking-[0.2em] uppercase text-grove-500/30 block mb-2">
+                          <div className="mt-4 pt-3 border-t border-water-400/10">
+                            <span className="font-ui text-[10px] tracking-[0.2em] uppercase text-water-500/45 block mb-2">
                               AI Reflections
                             </span>
                             {entry.aiMessages.map((msg, i) => (
                               <p
                                 key={i}
-                                className="font-body text-xs text-grove-400/40 italic mb-2"
+                                className="font-body text-xs text-water-500/50 italic mb-2"
                               >
                                 {msg.content}
                               </p>

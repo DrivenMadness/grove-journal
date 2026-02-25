@@ -48,7 +48,7 @@ export default function Synthesis() {
         transition={{ duration: 2, ease: 'easeOut' }}
         className="absolute w-64 h-64 rounded-full"
         style={{
-          background: 'radial-gradient(circle, rgba(90, 154, 90, 0.3) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(90, 173, 194, 0.28) 0%, transparent 70%)',
           filter: 'blur(40px)',
         }}
       />
@@ -63,7 +63,7 @@ export default function Synthesis() {
           <motion.div
             animate={{ opacity: [0.4, 1, 0.4] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="font-body text-lg text-grove-400/50"
+            className="font-body text-lg text-water-500/55"
           >
             Distilling your reflection...
           </motion.div>
@@ -78,7 +78,7 @@ export default function Synthesis() {
           transition={{ duration: 1, ease: 'easeOut' }}
           className="text-center max-w-lg"
         >
-          <span className="font-ui text-[10px] tracking-[0.3em] uppercase text-grove-500/40 block mb-8">
+          <span className="font-ui text-[10px] tracking-[0.3em] uppercase text-water-500/55 block mb-8">
             Today's maxim
           </span>
 
@@ -97,8 +97,8 @@ export default function Synthesis() {
             transition={{ delay: 1.2 }}
             className="mt-4"
           >
-            <div className="w-8 h-px bg-grove-400/30 mx-auto mb-4 mt-8" />
-            <span className="font-ui text-[10px] tracking-[0.2em] uppercase text-grove-500/30">
+            <div className="w-8 h-px bg-water-400/40 mx-auto mb-4 mt-8" />
+            <span className="font-ui text-[10px] tracking-[0.2em] uppercase text-water-500/40">
               {new Date().toLocaleDateString('en-US', {
                 month: 'long',
                 day: 'numeric',
@@ -116,11 +116,11 @@ export default function Synthesis() {
           >
             <button
               onClick={handleSave}
-              className="px-8 py-3 rounded-full border border-grove-400/20 bg-grove-900/30
-                         hover:border-grove-400/40 hover:bg-grove-900/50
+              className="px-8 py-3 rounded-full border border-water-400/25 bg-grove-900/30
+                         hover:border-water-400/45 hover:bg-grove-900/50
                          transition-all duration-300 cursor-pointer"
             >
-              <span className="font-ui text-sm tracking-[0.15em] uppercase text-grove-300/70">
+              <span className="font-ui text-sm tracking-[0.15em] uppercase text-water-300/75">
                 Save & close
               </span>
             </button>

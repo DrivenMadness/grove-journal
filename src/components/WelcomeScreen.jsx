@@ -18,7 +18,7 @@ export default function WelcomeScreen() {
           transition={{ delay: 2 }}
           className="absolute top-8 right-8"
         >
-          <span className="font-ui text-xs tracking-widest uppercase text-grove-400/40">
+          <span className="font-ui text-xs tracking-widest uppercase text-water-400/50">
             {currentStreak} day streak
           </span>
         </motion.div>
@@ -34,7 +34,7 @@ export default function WelcomeScreen() {
         <h1 className="font-display text-6xl md:text-7xl font-light tracking-wide text-grove-200/90 mb-2">
           Grove
         </h1>
-        <div className="w-12 h-px bg-grove-400/30 mx-auto mb-8" />
+        <div className="w-12 h-px bg-water-400/40 mx-auto mb-8" />
       </motion.div>
 
       {/* Personalized greeting */}
@@ -44,7 +44,7 @@ export default function WelcomeScreen() {
         transition={{ delay: 0.6, duration: 1 }}
         className="text-center max-w-md mb-16"
       >
-        <p className="font-body text-lg md:text-xl text-grove-300/70 leading-relaxed">
+        <p className="font-body text-lg md:text-xl text-grove-200/75 leading-relaxed">
           {greeting}
         </p>
         {lastMaxim && (
@@ -52,7 +52,7 @@ export default function WelcomeScreen() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 0.8 }}
-            className="font-body text-sm text-grove-500/50 italic mt-4 leading-relaxed"
+            className="font-body text-sm text-water-400/55 italic mt-4 leading-relaxed"
           >
             {lastMaxim}
           </motion.p>
@@ -67,12 +67,12 @@ export default function WelcomeScreen() {
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         onClick={() => setScreen('mode-select')}
-        className="group relative px-10 py-4 rounded-full border border-grove-400/20 
+        className="group relative px-10 py-4 rounded-full border border-water-400/25 
                    bg-grove-900/30 backdrop-blur-sm
-                   hover:border-grove-400/40 hover:bg-grove-900/50
+                   hover:border-water-400/45 hover:bg-grove-900/50
                    transition-all duration-500 cursor-pointer"
       >
-        <span className="font-ui text-sm tracking-[0.2em] uppercase text-grove-300/80 group-hover:text-grove-200">
+        <span className="font-ui text-sm tracking-[0.2em] uppercase text-water-300/85 group-hover:text-water-200">
           Begin
         </span>
       </motion.button>
@@ -84,8 +84,8 @@ export default function WelcomeScreen() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.8 }}
           onClick={() => setScreen('history')}
-          className="mt-8 font-ui text-xs tracking-widest uppercase text-grove-500/40 
-                     hover:text-grove-400/60 transition-colors cursor-pointer"
+          className="mt-8 font-ui text-xs tracking-widest uppercase text-water-500/50 
+                     hover:text-water-400/70 transition-colors cursor-pointer"
         >
           Past reflections ({totalEntries})
         </motion.button>
@@ -98,7 +98,7 @@ export default function WelcomeScreen() {
         transition={{ delay: 2.5 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
-        <span className="font-ui text-[10px] tracking-[0.3em] uppercase text-grove-600/30">
+        <span className="font-ui text-[10px] tracking-[0.3em] uppercase text-water-600/35">
           {new Date().toLocaleDateString('en-US', {
             weekday: 'long',
             month: 'long',

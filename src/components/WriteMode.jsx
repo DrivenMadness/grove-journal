@@ -54,20 +54,20 @@ export default function WriteMode() {
       >
         <button
           onClick={() => setScreen('mode-select')}
-          className="font-ui text-xs tracking-widest uppercase text-grove-500/40 
-                     hover:text-grove-400/60 transition-colors cursor-pointer"
+          className="font-ui text-xs tracking-widest uppercase text-water-500/50 
+                     hover:text-water-400/70 transition-colors cursor-pointer"
         >
           ← Back
         </button>
         <div className="flex items-center gap-6">
-          <span className="font-ui text-xs text-grove-500/30">
+          <span className="font-ui text-xs text-water-500/40">
             {wordCount} {wordCount === 1 ? 'word' : 'words'}
           </span>
           {content.trim().length > 20 && (
             <button
               onClick={handleFinish}
-              className="font-ui text-xs tracking-widest uppercase text-grove-400/60 
-                         hover:text-grove-300 transition-colors cursor-pointer"
+              className="font-ui text-xs tracking-widest uppercase text-water-400/65 
+                         hover:text-water-300 transition-colors cursor-pointer"
             >
               Finish →
             </button>
@@ -102,19 +102,19 @@ export default function WriteMode() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 40 }}
               transition={{ duration: 0.4 }}
-              className="md:w-2/5 px-6 md:px-8 py-4 border-l border-grove-400/10 overflow-y-auto"
+              className="md:w-2/5 px-6 md:px-8 py-4 border-l border-water-400/15 overflow-y-auto"
             >
               <div className="mb-4">
-                <span className="font-ui text-[10px] tracking-[0.3em] uppercase text-grove-500/40">
+                <span className="font-ui text-[10px] tracking-[0.3em] uppercase text-water-500/50">
                   Reflection
                 </span>
               </div>
-              <p className="font-body text-base text-grove-200/70 leading-relaxed">
+              <p className="font-body text-base text-grove-200/75 leading-relaxed">
                 {aiResponse}
               </p>
               <button
                 onClick={() => setShowAI(false)}
-                className="mt-6 font-ui text-xs text-grove-500/30 hover:text-grove-400/50 
+                className="mt-6 font-ui text-xs text-water-500/40 hover:text-water-400/60 
                            transition-colors cursor-pointer"
               >
                 Close
@@ -135,13 +135,13 @@ export default function WriteMode() {
           <button
             onClick={handleReflect}
             disabled={loading}
-            className="px-6 py-2.5 rounded-full border border-grove-400/20 
+            className="px-6 py-2.5 rounded-full border border-water-400/25 
                        bg-grove-900/30 backdrop-blur-sm
-                       hover:border-grove-400/40 hover:bg-grove-900/50
+                       hover:border-water-400/45 hover:bg-grove-900/50
                        transition-all duration-300 cursor-pointer
                        disabled:opacity-30"
           >
-            <span className="font-ui text-xs tracking-[0.15em] uppercase text-grove-300/70">
+            <span className="font-ui text-xs tracking-[0.15em] uppercase text-water-300/75">
               {loading ? 'Reflecting...' : 'Get reflection'}
             </span>
           </button>

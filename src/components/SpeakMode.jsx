@@ -46,13 +46,13 @@ export default function SpeakMode() {
   if (!isSupported) {
     return (
       <div className="relative z-10 flex flex-col items-center justify-center h-screen px-6">
-        <p className="font-body text-lg text-grove-300/60 text-center max-w-md">
+        <p className="font-body text-lg text-grove-200/70 text-center max-w-md">
           Voice input isn't supported in this browser. Try Chrome or Edge, or switch to Write mode.
         </p>
         <button
           onClick={() => setScreen('mode-select')}
-          className="mt-8 font-ui text-xs tracking-widest uppercase text-grove-400/60 
-                     hover:text-grove-300 transition-colors cursor-pointer"
+          className="mt-8 font-ui text-xs tracking-widest uppercase text-water-400/65 
+                     hover:text-water-300 transition-colors cursor-pointer"
         >
           ← Choose another mode
         </button>
@@ -74,13 +74,13 @@ export default function SpeakMode() {
             stopListening();
             setScreen('mode-select');
           }}
-          className="font-ui text-xs tracking-widest uppercase text-grove-500/40 
-                     hover:text-grove-400/60 transition-colors cursor-pointer"
+          className="font-ui text-xs tracking-widest uppercase text-water-500/50 
+                     hover:text-water-400/70 transition-colors cursor-pointer"
         >
           ← Back
         </button>
         <div className="flex items-center gap-6">
-          <span className="font-ui text-xs text-grove-500/30">
+          <span className="font-ui text-xs text-water-500/40">
             {wordCount} {wordCount === 1 ? 'word' : 'words'}
           </span>
           {transcript.trim().length > 20 && (
@@ -89,8 +89,8 @@ export default function SpeakMode() {
                 stopListening();
                 setScreen('synthesis');
               }}
-              className="font-ui text-xs tracking-widest uppercase text-grove-400/60 
-                         hover:text-grove-300 transition-colors cursor-pointer"
+              className="font-ui text-xs tracking-widest uppercase text-water-400/65 
+                         hover:text-water-300 transition-colors cursor-pointer"
             >
               Finish →
             </button>
@@ -108,7 +108,7 @@ export default function SpeakMode() {
           >
             {transcript}
             {interimTranscript && (
-              <span className="text-grove-400/40 italic"> {interimTranscript}</span>
+              <span className="text-water-400/45 italic"> {interimTranscript}</span>
             )}
           </motion.p>
         ) : (
@@ -116,7 +116,7 @@ export default function SpeakMode() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="font-body text-lg text-grove-400/30 italic text-center mt-20"
+            className="font-body text-lg text-water-500/40 italic text-center mt-20"
           >
             {isListening ? 'Listening...' : 'Tap the circle to start speaking'}
           </motion.p>
@@ -129,12 +129,12 @@ export default function SpeakMode() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="mt-8 pt-8 border-t border-grove-400/10"
+              className="mt-8 pt-8 border-t border-water-400/15"
             >
-              <span className="font-ui text-[10px] tracking-[0.3em] uppercase text-grove-500/40 block mb-3">
+              <span className="font-ui text-[10px] tracking-[0.3em] uppercase text-water-500/50 block mb-3">
                 Reflection
               </span>
-              <p className="font-body text-base text-grove-300/70 leading-relaxed">
+              <p className="font-body text-base text-grove-200/75 leading-relaxed">
                 {aiResponse}
               </p>
             </motion.div>
@@ -157,9 +157,9 @@ export default function SpeakMode() {
           {/* Pulse rings when recording */}
           {isListening && (
             <>
-              <span className="absolute inset-0 rounded-full bg-grove-400/20 pulse-ring" />
+              <span className="absolute inset-0 rounded-full bg-water-400/25 pulse-ring" />
               <span
-                className="absolute inset-0 rounded-full bg-grove-400/10 pulse-ring"
+                className="absolute inset-0 rounded-full bg-water-400/12 pulse-ring"
                 style={{ animationDelay: '0.5s' }}
               />
             </>
@@ -169,19 +169,19 @@ export default function SpeakMode() {
                         transition-all duration-300
                         ${
                           isListening
-                            ? 'bg-grove-400/30 border-2 border-grove-400/50'
-                            : 'bg-grove-900/40 border border-grove-400/20 hover:border-grove-400/40'
+                            ? 'bg-water-400/35 border-2 border-water-400/55'
+                            : 'bg-grove-900/40 border border-water-400/25 hover:border-water-400/45'
                         }`}
           >
             {isListening ? (
-              <div className="w-5 h-5 rounded-sm bg-grove-300/80" />
+              <div className="w-5 h-5 rounded-sm bg-water-300/85" />
             ) : (
-              <div className="w-4 h-4 rounded-full bg-grove-400/60" />
+              <div className="w-4 h-4 rounded-full bg-water-400/65" />
             )}
           </div>
         </button>
 
-        <span className="font-ui text-[10px] tracking-[0.2em] uppercase text-grove-500/30">
+        <span className="font-ui text-[10px] tracking-[0.2em] uppercase text-water-500/40">
           {isListening ? 'Tap to pause' : 'Tap to speak'}
         </span>
 
@@ -192,11 +192,11 @@ export default function SpeakMode() {
             animate={{ opacity: 1 }}
             onClick={handleReflect}
             disabled={loading}
-            className="mt-2 px-6 py-2.5 rounded-full border border-grove-400/20 
-                       bg-grove-900/30 hover:border-grove-400/40
+            className="mt-2 px-6 py-2.5 rounded-full border border-water-400/25 
+                       bg-grove-900/30 hover:border-water-400/45
                        transition-all duration-300 cursor-pointer disabled:opacity-30"
           >
-            <span className="font-ui text-xs tracking-[0.15em] uppercase text-grove-300/70">
+            <span className="font-ui text-xs tracking-[0.15em] uppercase text-water-300/75">
               {loading ? 'Reflecting...' : 'Get reflection'}
             </span>
           </motion.button>

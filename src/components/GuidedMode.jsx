@@ -140,7 +140,7 @@ export default function GuidedMode() {
           animate={{ opacity: 1 }}
           className="text-center"
         >
-          <div className="animate-breathe font-body text-lg text-grove-400/40">
+          <div className="animate-breathe font-body text-lg text-water-500/50">
             Preparing your reflection...
           </div>
         </motion.div>
@@ -155,11 +155,11 @@ export default function GuidedMode() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center"
         >
-          <p className="font-display text-2xl md:text-3xl font-light text-grove-200/80 mb-10 leading-relaxed">
+          <p className="font-display text-2xl md:text-3xl font-light text-grove-200/85 leading-relaxed mb-10">
             {currentPrompt.question}
           </p>
           {currentPrompt.maximSuffix && (
-            <p className="font-body text-base text-grove-500/60 italic mb-10 leading-relaxed">
+            <p className="font-body text-base text-water-500/60 italic mb-10 leading-relaxed">
               {currentPrompt.maximSuffix}
             </p>
           )}
@@ -170,11 +170,11 @@ export default function GuidedMode() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => handleChoiceSelect(option)}
-                className="px-6 py-3 rounded-full border border-grove-400/20 bg-grove-900/30
-                           hover:border-grove-400/40 hover:bg-grove-900/50
+                className="px-6 py-3 rounded-full border border-water-400/25 bg-grove-900/30
+                           hover:border-water-400/45 hover:bg-grove-900/50
                            transition-all duration-300 cursor-pointer"
               >
-                <span className="font-ui text-sm text-grove-300/70">{option}</span>
+                <span className="font-ui text-sm text-water-300/75">{option}</span>
               </motion.button>
             ))}
           </div>
@@ -190,14 +190,14 @@ export default function GuidedMode() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center max-w-lg mx-auto"
         >
-          <span className="font-ui text-[10px] tracking-[0.3em] uppercase text-earth-400/60 block mb-4">
+          <span className="font-ui text-[10px] tracking-[0.3em] uppercase text-water-500/55 block mb-4">
             Exercise — {currentPrompt.title}
           </span>
           <p className="font-display text-xl md:text-2xl font-light text-grove-200/80 leading-relaxed">
             {currentPrompt.instruction}
           </p>
           {currentPrompt.maximSuffix && (
-            <p className="font-body text-base text-grove-500/60 italic mt-6 leading-relaxed">
+            <p className="font-body text-base text-water-500/60 italic mt-6 leading-relaxed">
               {currentPrompt.maximSuffix}
             </p>
           )}
@@ -213,7 +213,7 @@ export default function GuidedMode() {
         animate={{ opacity: 1, y: 0 }}
         className="text-center max-w-lg mx-auto"
       >
-        <span className="font-ui text-[10px] tracking-[0.3em] uppercase text-grove-500/40 block mb-4">
+        <span className="font-ui text-[10px] tracking-[0.3em] uppercase text-water-500/50 block mb-4">
           {currentPrompt.category === 'ai-generated'
             ? 'Tailored for you'
             : currentPrompt.category}
@@ -222,7 +222,7 @@ export default function GuidedMode() {
           {currentPrompt.text}
         </p>
         {currentPrompt.maximSuffix && (
-          <p className="font-body text-base text-grove-500/60 italic mt-6 leading-relaxed">
+          <p className="font-body text-base text-water-500/60 italic mt-6 leading-relaxed">
             {currentPrompt.maximSuffix}
           </p>
         )}
@@ -241,16 +241,16 @@ export default function GuidedMode() {
       >
         <button
           onClick={() => setScreen('mode-select')}
-          className="font-ui text-xs tracking-widest uppercase text-grove-500/40 
-                     hover:text-grove-400/60 transition-colors cursor-pointer"
+          className="font-ui text-xs tracking-widest uppercase text-water-500/50 
+                     hover:text-water-400/70 transition-colors cursor-pointer"
         >
           ← Back
         </button>
         {responses.length > 0 && (
           <button
             onClick={() => setScreen('synthesis')}
-            className="font-ui text-xs tracking-widest uppercase text-grove-400/60 
-                       hover:text-grove-300 transition-colors cursor-pointer"
+            className="font-ui text-xs tracking-widest uppercase text-water-400/65 
+                       hover:text-water-300 transition-colors cursor-pointer"
           >
             Finish →
           </button>
@@ -286,11 +286,11 @@ export default function GuidedMode() {
                 <button
                   onClick={handleSubmitResponse}
                   disabled={loading}
-                  className="px-8 py-3 rounded-full border border-grove-400/20 bg-grove-900/30
-                             hover:border-grove-400/40 hover:bg-grove-900/50
+                  className="px-8 py-3 rounded-full border border-water-400/25 bg-grove-900/30
+                             hover:border-water-400/45 hover:bg-grove-900/50
                              transition-all duration-300 cursor-pointer disabled:opacity-30"
                 >
-                  <span className="font-ui text-xs tracking-[0.15em] uppercase text-grove-300/70">
+                  <span className="font-ui text-xs tracking-[0.15em] uppercase text-water-300/75">
                     {loading ? 'Thinking...' : 'Reflect'}
                   </span>
                 </button>
@@ -306,17 +306,17 @@ export default function GuidedMode() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="w-full max-w-xl mt-8 pt-6 border-t border-grove-400/10 text-center"
+              className="w-full max-w-xl mt-8 pt-6 border-t border-water-400/15 text-center"
             >
-              <p className="font-body text-base text-grove-300/70 leading-relaxed mb-6">
+              <p className="font-body text-base text-grove-200/75 leading-relaxed mb-6">
                 {aiReflection}
               </p>
               <button
                 onClick={handleNext}
-                className="px-6 py-2.5 rounded-full border border-grove-400/20 bg-grove-900/30
-                           hover:border-grove-400/40 transition-all duration-300 cursor-pointer"
+                className="px-6 py-2.5 rounded-full border border-water-400/25 bg-grove-900/30
+                           hover:border-water-400/45 transition-all duration-300 cursor-pointer"
               >
-                <span className="font-ui text-xs tracking-[0.15em] uppercase text-grove-300/70">
+                <span className="font-ui text-xs tracking-[0.15em] uppercase text-water-300/75">
                   Next reflection
                 </span>
               </button>
@@ -331,10 +331,10 @@ export default function GuidedMode() {
           {responses.map((_, i) => (
             <div
               key={i}
-              className="w-1.5 h-1.5 rounded-full bg-grove-400/30"
+              className="w-1.5 h-1.5 rounded-full bg-water-400/35"
             />
           ))}
-          <div className="w-1.5 h-1.5 rounded-full bg-grove-400/60 animate-breathe" />
+          <div className="w-1.5 h-1.5 rounded-full bg-water-400/65 animate-breathe" />
         </div>
       )}
     </div>

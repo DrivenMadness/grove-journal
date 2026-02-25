@@ -50,8 +50,8 @@ export default function ModeSelector() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
         onClick={() => setScreen('welcome')}
-        className="absolute top-8 left-8 font-ui text-xs tracking-widest uppercase text-grove-500/40 
-                   hover:text-grove-400/60 transition-colors cursor-pointer"
+        className="absolute top-8 left-8 font-ui text-xs tracking-widest uppercase text-water-500/50 
+                   hover:text-water-400/70 transition-colors cursor-pointer"
       >
         ← Back
       </motion.button>
@@ -60,7 +60,7 @@ export default function ModeSelector() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="font-display text-2xl md:text-3xl font-light text-grove-200/80 mb-12"
+        className="font-display text-2xl md:text-3xl font-light text-grove-200/85 mb-12"
       >
         How do you want to reflect?
       </motion.p>
@@ -77,19 +77,19 @@ export default function ModeSelector() {
             onClick={() => startSession(mode.id)}
             className="group relative flex flex-col items-center gap-4 
                        w-48 md:w-52 py-10 px-6
-                       rounded-2xl border border-grove-400/15 
+                       rounded-2xl border border-water-400/20 
                        bg-grove-900/20 backdrop-blur-sm
-                       hover:border-grove-400/30 hover:bg-grove-900/40
+                       hover:border-water-400/35 hover:bg-grove-900/40
                        transition-all duration-500 cursor-pointer"
           >
-            <div className="text-grove-400/60 group-hover:text-grove-300/80 transition-colors">
+            <div className="text-water-400/65 group-hover:text-water-300/85 transition-colors">
               {mode.icon}
             </div>
             <div className="text-center">
-              <p className="font-ui text-sm tracking-[0.15em] uppercase text-grove-200/80 group-hover:text-grove-100 mb-1">
+              <p className="font-ui text-sm tracking-[0.15em] uppercase text-grove-200/85 group-hover:text-water-100 mb-1">
                 {mode.label}
               </p>
-              <p className="font-body text-xs text-grove-400/40 group-hover:text-grove-400/60">
+              <p className="font-body text-xs text-water-500/45 group-hover:text-water-400/65">
                 {mode.description}
               </p>
             </div>

@@ -3,15 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --grove-deep: #0f220f;
-  --grove-dark: #1a361a;
-  --grove-mid: #2d5e2d;
-  --grove-light: #5a9a5a;
-  --grove-pale: #b8d4b8;
-  --earth-warm: #c9a87a;
-  --earth-deep: #5e4524;
-  --water-soft: #6ba8a8;
-  --mist-white: #e8ede8;
+  --grove-deep: #0f2422;
+  --grove-dark: #1a332f;
+  --grove-mid: #2d5652;
+  --grove-light: #4d8a82;
+  --grove-pale: #a3cdc5;
+  --earth-warm: #b5a67a;
+  --earth-deep: #4a4024;
+  --water-soft: #5aadc2;
+  --water-mist: #e8f4f8;
+  --mist-white: #e2ecf0;
 }
 
 * {
@@ -51,12 +52,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(139, 186, 139, 0.3);
+  background: rgba(90, 173, 194, 0.35);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(139, 186, 139, 0.5);
+  background: rgba(90, 173, 194, 0.5);
 }
 
 /* Distraction-free textarea */
@@ -71,11 +72,11 @@ body {
   font-size: 1.125rem;
   line-height: 1.8;
   color: var(--mist-white);
-  caret-color: var(--grove-light);
+  caret-color: var(--water-soft);
 }
 
 .journal-textarea::placeholder {
-  color: rgba(168, 189, 168, 0.4);
+  color: rgba(163, 205, 197, 0.45);
   font-style: italic;
 }
 
@@ -89,7 +90,7 @@ body {
 
 /* Text selection */
 ::selection {
-  background: rgba(90, 154, 90, 0.3);
+  background: rgba(90, 173, 194, 0.35);
   color: var(--mist-white);
 }
 
@@ -118,9 +119,9 @@ body {
 .water-gradient {
   background: linear-gradient(
     135deg,
-    rgba(107, 168, 168, 0.1) 0%,
-    rgba(90, 154, 90, 0.05) 50%,
-    rgba(107, 168, 168, 0.1) 100%
+    rgba(90, 173, 194, 0.12) 0%,
+    rgba(61, 110, 126, 0.06) 50%,
+    rgba(90, 173, 194, 0.12) 100%
   );
 }
 
