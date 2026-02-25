@@ -7,9 +7,10 @@ export function useTextToSpeech() {
   const [error, setError] = useState(null);
   const audioRef = useRef(null);
 
-  const speak = useCallback(async (textToSpeak) => {
+  const speak = useCallback(async (textToSpeak, options = {}) => {
     if (!textToSpeak?.trim()) return;
 
+    const voice = options.voice ?? 'shimmer';
     const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
     if (!apiKey) {
       setError('TTS API key not configured');
@@ -28,7 +29,7 @@ export function useTextToSpeech() {
         },
         body: JSON.stringify({
           model: 'tts-1',
-          voice: 'nova',
+          voice,
           input: textToSpeak,
         }),
       });

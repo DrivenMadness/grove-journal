@@ -6,6 +6,13 @@ import { useAI } from '../hooks/useAI';
 import { useTextToSpeech } from '../hooks/useTextToSpeech';
 
 const CONVERSATION_MAX_TOKENS = 180; // Keep Claude to 2-3 sentences
+const TTS_VOICE_KEY = 'grove-tts-voice';
+const TTS_VOICES = [
+  { id: 'shimmer', label: 'Shimmer' },
+  { id: 'nova', label: 'Nova' },
+  { id: 'coral', label: 'Coral' },
+  { id: 'sage', label: 'Sage' },
+];
 
 function formatSessionContent(messages) {
   return messages
@@ -29,6 +36,16 @@ export default function TalkMode() {
 
   const [messages, setMessages] = useState([]);
   const [isProcessing, setIsProcessing] = useState(false); // sending to AI or playing TTS
+  const [ttsVoice, setTtsVoice] = useState(() => {
+    if (typeof localStorage === 'undefined') return 'shimmer';
+    return localStorage.getItem(TTS_VOICE_KEY) || 'shimmer';
+  });
+
+  const handleVoiceChange = useCallback((e) => {
+    const voice = e.target.value;
+    setTtsVoice(voice);
+    localStorage.setItem(TTS_VOICE_KEY, voice);
+  }, []);
 
   const canUseMic = !aiLoading && !isPlaying && !isProcessing;
   const displayTranscript = transcript + (interimTranscript ? ` ${interimTranscript}` : '').trim();
@@ -58,7 +75,7 @@ export default function TalkMode() {
       const assistantMessage = { role: 'assistant', content: response };
       setMessages((prev) => [...prev, assistantMessage]);
       addAIMessage({ role: 'assistant', content: response });
-      await speak(response);
+      await speak(response, { voice: ttsVoice });
     } catch {
       setMessages((prev) => prev.slice(0, -1)); // remove user message on error so they can retry
       // Optionally show a subtle error state
@@ -74,6 +91,7 @@ export default function TalkMode() {
     reflect,
     addAIMessage,
     speak,
+    ttsVoice,
   ]);
 
   const handleMicPress = useCallback(() => {
@@ -113,7 +131,7 @@ export default function TalkMode() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="flex items-center justify-between px-6 md:px-12 py-6 shrink-0"
+        className="flex items-center justify-between px-6 md:px-12 py-6 shrink-0 flex-wrap gap-3"
       >
         <button
           onClick={() => { stopListening(); stopTTS(); setScreen('mode-select'); }}
@@ -121,14 +139,33 @@ export default function TalkMode() {
         >
           ← Back
         </button>
-        {messages.length > 0 && (
-          <button
-            onClick={handleFinish}
-            className="font-ui text-xs tracking-widest uppercase text-water-400/65 hover:text-water-300 transition-colors cursor-pointer"
-          >
-            Finish →
-          </button>
-        )}
+        <div className="flex items-center gap-4">
+          <label className="flex items-center gap-2">
+            <span className="font-ui text-[10px] tracking-wider uppercase text-water-500/50">
+              Voice
+            </span>
+            <select
+              value={ttsVoice}
+              onChange={handleVoiceChange}
+              className="font-ui text-xs bg-grove-900/40 border border-water-400/20 rounded-lg px-3 py-1.5 
+                         text-water-200/90 focus:outline-none focus:border-water-400/40 cursor-pointer"
+            >
+              {TTS_VOICES.map((v) => (
+                <option key={v.id} value={v.id} className="bg-grove-900 text-grove-100">
+                  {v.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          {messages.length > 0 && (
+            <button
+              onClick={handleFinish}
+              className="font-ui text-xs tracking-widest uppercase text-water-400/65 hover:text-water-300 transition-colors cursor-pointer"
+            >
+              Finish →
+            </button>
+          )}
+        </div>
       </motion.div>
 
       {/* Chat thread */}
