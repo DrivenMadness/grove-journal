@@ -1,0 +1,207 @@
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import useJournalStore from '../hooks/useJournalStore';
+import { useSpeechToText } from '../hooks/useSpeechToText';
+import { useAI } from '../hooks/useAI';
+
+export default function SpeakMode() {
+  const { updateSessionContent, addAIMessage, setScreen } = useJournalStore();
+  const {
+    isListening,
+    transcript,
+    interimTranscript,
+    isSupported,
+    startListening,
+    stopListening,
+  } = useSpeechToText();
+  const { reflect, loading } = useAI();
+  const [aiResponse, setAiResponse] = useState('');
+  const [conversationHistory, setConversationHistory] = useState([]);
+
+  const fullText = transcript + (interimTranscript ? ` ${interimTranscript}` : '');
+  const wordCount = fullText.trim().split(/\s+/).filter(Boolean).length;
+
+  useEffect(() => {
+    updateSessionContent(fullText);
+  }, [fullText, updateSessionContent]);
+
+  const handleReflect = async () => {
+    if (!transcript.trim() || loading) return;
+    stopListening();
+
+    try {
+      const response = await reflect(transcript, conversationHistory);
+      setAiResponse(response);
+      setConversationHistory((prev) => [
+        ...prev,
+        { role: 'user', content: transcript },
+        { role: 'assistant', content: response },
+      ]);
+      addAIMessage({ role: 'assistant', content: response });
+    } catch {
+      setAiResponse('Something went wrong. Your words still matter.');
+    }
+  };
+
+  if (!isSupported) {
+    return (
+      <div className="relative z-10 flex flex-col items-center justify-center h-screen px-6">
+        <p className="font-body text-lg text-grove-300/60 text-center max-w-md">
+          Voice input isn't supported in this browser. Try Chrome or Edge, or switch to Write mode.
+        </p>
+        <button
+          onClick={() => setScreen('mode-select')}
+          className="mt-8 font-ui text-xs tracking-widest uppercase text-grove-400/60 
+                     hover:text-grove-300 transition-colors cursor-pointer"
+        >
+          ← Choose another mode
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative z-10 flex flex-col items-center h-screen">
+      {/* Top bar */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+        className="w-full flex items-center justify-between px-6 md:px-12 py-6"
+      >
+        <button
+          onClick={() => {
+            stopListening();
+            setScreen('mode-select');
+          }}
+          className="font-ui text-xs tracking-widest uppercase text-grove-500/40 
+                     hover:text-grove-400/60 transition-colors cursor-pointer"
+        >
+          ← Back
+        </button>
+        <div className="flex items-center gap-6">
+          <span className="font-ui text-xs text-grove-500/30">
+            {wordCount} {wordCount === 1 ? 'word' : 'words'}
+          </span>
+          {transcript.trim().length > 20 && (
+            <button
+              onClick={() => {
+                stopListening();
+                setScreen('synthesis');
+              }}
+              className="font-ui text-xs tracking-widest uppercase text-grove-400/60 
+                         hover:text-grove-300 transition-colors cursor-pointer"
+            >
+              Finish →
+            </button>
+          )}
+        </div>
+      </motion.div>
+
+      {/* Transcript area */}
+      <div className="flex-1 w-full max-w-2xl px-6 md:px-12 py-8 overflow-y-auto">
+        {fullText ? (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="font-body text-lg text-grove-200/80 leading-relaxed"
+          >
+            {transcript}
+            {interimTranscript && (
+              <span className="text-grove-400/40 italic"> {interimTranscript}</span>
+            )}
+          </motion.p>
+        ) : (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="font-body text-lg text-grove-400/30 italic text-center mt-20"
+          >
+            {isListening ? 'Listening...' : 'Tap the circle to start speaking'}
+          </motion.p>
+        )}
+
+        {/* AI Response */}
+        <AnimatePresence>
+          {aiResponse && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="mt-8 pt-8 border-t border-grove-400/10"
+            >
+              <span className="font-ui text-[10px] tracking-[0.3em] uppercase text-grove-500/40 block mb-3">
+                Reflection
+              </span>
+              <p className="font-body text-base text-grove-300/70 leading-relaxed">
+                {aiResponse}
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Recording controls */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+        className="flex flex-col items-center gap-4 pb-12"
+      >
+        {/* Main record button */}
+        <button
+          onClick={isListening ? stopListening : startListening}
+          className="relative cursor-pointer"
+        >
+          {/* Pulse rings when recording */}
+          {isListening && (
+            <>
+              <span className="absolute inset-0 rounded-full bg-grove-400/20 pulse-ring" />
+              <span
+                className="absolute inset-0 rounded-full bg-grove-400/10 pulse-ring"
+                style={{ animationDelay: '0.5s' }}
+              />
+            </>
+          )}
+          <div
+            className={`relative w-16 h-16 rounded-full flex items-center justify-center 
+                        transition-all duration-300
+                        ${
+                          isListening
+                            ? 'bg-grove-400/30 border-2 border-grove-400/50'
+                            : 'bg-grove-900/40 border border-grove-400/20 hover:border-grove-400/40'
+                        }`}
+          >
+            {isListening ? (
+              <div className="w-5 h-5 rounded-sm bg-grove-300/80" />
+            ) : (
+              <div className="w-4 h-4 rounded-full bg-grove-400/60" />
+            )}
+          </div>
+        </button>
+
+        <span className="font-ui text-[10px] tracking-[0.2em] uppercase text-grove-500/30">
+          {isListening ? 'Tap to pause' : 'Tap to speak'}
+        </span>
+
+        {/* Reflect button */}
+        {transcript.trim().length > 50 && !isListening && (
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            onClick={handleReflect}
+            disabled={loading}
+            className="mt-2 px-6 py-2.5 rounded-full border border-grove-400/20 
+                       bg-grove-900/30 hover:border-grove-400/40
+                       transition-all duration-300 cursor-pointer disabled:opacity-30"
+          >
+            <span className="font-ui text-xs tracking-[0.15em] uppercase text-grove-300/70">
+              {loading ? 'Reflecting...' : 'Get reflection'}
+            </span>
+          </motion.button>
+        )}
+      </motion.div>
+    </div>
+  );
+}

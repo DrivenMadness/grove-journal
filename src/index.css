@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --grove-deep: #0f220f;
+  --grove-dark: #1a361a;
+  --grove-mid: #2d5e2d;
+  --grove-light: #5a9a5a;
+  --grove-pale: #b8d4b8;
+  --earth-warm: #c9a87a;
+  --earth-deep: #5e4524;
+  --water-soft: #6ba8a8;
+  --mist-white: #e8ede8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Safe area for iPhone notch / dynamic island */
+#root {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  background-color: var(--grove-deep);
+  color: var(--mist-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar — subtle, nature-themed */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 186, 139, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 186, 139, 0.5);
+}
+
+/* Distraction-free textarea */
+.journal-textarea {
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  width: 100%;
+  height: 100%;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--mist-white);
+  caret-color: var(--grove-light);
+}
+
+.journal-textarea::placeholder {
+  color: rgba(168, 189, 168, 0.4);
+  font-style: italic;
+}
+
+/* Ambient glow effects */
+.ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+/* Text selection */
+::selection {
+  background: rgba(90, 154, 90, 0.3);
+  color: var(--mist-white);
+}
+
+/* Smooth transitions globally */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Voice recording pulse */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+.pulse-ring {
+  animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+/* Flowing water gradient */
+.water-gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(107, 168, 168, 0.1) 0%,
+    rgba(90, 154, 90, 0.05) 50%,
+    rgba(107, 168, 168, 0.1) 100%
+  );
+}
+
+/* Grain texture overlay */
+.grain-overlay::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px;
+  z-index: 9999;
+}
