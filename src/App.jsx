@@ -3,7 +3,7 @@ import NatureBackground from './components/NatureBackground';
 import WelcomeScreen from './components/WelcomeScreen';
 import ModeSelector from './components/ModeSelector';
 import WriteMode from './components/WriteMode';
-import SpeakMode from './components/SpeakMode';
+import TalkMode from './components/TalkMode';
 import GuidedMode from './components/GuidedMode';
 import Synthesis from './components/Synthesis';
 import PastEntries from './components/PastEntries';
@@ -33,8 +33,8 @@ export default function App() {
         switch (sessionMode) {
           case 'write':
             return <WriteMode key="write" />;
-          case 'speak':
-            return <SpeakMode key="speak" />;
+          case 'talk':
+            return <TalkMode key="talk" />;
           case 'guided':
             return <GuidedMode key="guided" />;
           default:

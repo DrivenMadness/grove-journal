@@ -94,15 +94,15 @@ ${entrySummaries.length > 0 ? entrySummaries.join('\n\n') : 'No previous entries
     [sendMessage]
   );
 
-  // Get a conversational AI response during guided/write mode
+  // Get a conversational AI response during guided/write mode (or talk mode with short replies)
   const reflect = useCallback(
-    async (userMessage, conversationHistory = []) => {
+    async (userMessage, conversationHistory = [], options = {}) => {
       const messages = [
         ...conversationHistory,
         { role: 'user', content: userMessage },
       ];
-
-      return sendMessage(messages, { maxTokens: 512 });
+      const maxTokens = options.maxTokens ?? 512;
+      return sendMessage(messages, { maxTokens });
     },
     [sendMessage]
   );

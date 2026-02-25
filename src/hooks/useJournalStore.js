@@ -9,7 +9,7 @@ const useJournalStore = create(
       
       // Current session
       currentSession: null,
-      sessionMode: null, // 'write' | 'speak' | 'guided'
+      sessionMode: null, // 'write' | 'talk' | 'guided'
       
       // App state
       screen: 'welcome', // 'welcome' | 'mode-select' | 'session' | 'synthesis' | 'history'
